@@ -1,5 +1,6 @@
 package org.example.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,10 +12,20 @@ public class Contato implements Serializable {
     @Column(name = "CON_ID")
     private Long conId;
 
-    @Column(name = "CON_CELULAR", length = 14)
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "CON_CLI_ID")
+    private Cliente conCliente;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "CON_FOR_ID")
+    private Fornecedor conFornecedor;
+
+    @Column(name = "CON_CELULAR", length = 15)
     private String conCelular;
 
-    @Column(name = "CON_TELEFONE_COMERCIAL", length = 14)
+    @Column(name = "CON_TELEFONE_COMERCIAL", length = 15)
     private String conTelefoneComercial;
 
     @Column(length = 55, name = "CON_EMAIL")
@@ -23,8 +34,17 @@ public class Contato implements Serializable {
     public Contato() {
     }
 
-    public Contato(Long conId, String conCelular, String conTelefoneComercial, String conEmail) {
+    public Contato(Long conId, Cliente conCliente, String conCelular, String conTelefoneComercial, String conEmail) {
         this.conId = conId;
+        this.conCliente = conCliente;
+        this.conCelular = conCelular;
+        this.conTelefoneComercial = conTelefoneComercial;
+        this.conEmail = conEmail;
+    }
+
+    public Contato(Long conId, Fornecedor conFornecedor, String conCelular, String conTelefoneComercial, String conEmail) {
+        this.conId = conId;
+        this.conFornecedor = conFornecedor;
         this.conCelular = conCelular;
         this.conTelefoneComercial = conTelefoneComercial;
         this.conEmail = conEmail;

@@ -11,6 +11,10 @@ public class Produto implements Serializable {
     @Column(name = "PRO_ID")
     private Long proId;
 
+    @ManyToOne
+    @JoinColumn(name="fornecedor_id")
+    private Fornecedor fornecedor;
+
     @Column(name = "PRO_NOME")
     private String proNome;
 
@@ -60,5 +64,12 @@ public class Produto implements Serializable {
 
     public void setProPrecoVenda(Double proPrecoVenda) {
         this.proPrecoVenda = proPrecoVenda;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 }
